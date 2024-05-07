@@ -16,7 +16,7 @@ declare const global: {
 
 const uri: string = process.env.MONGODB_URI;
 const options: CustomMongoClientOptions = {
-  dbName: "ai-prompts",
+  dbName: "form-builder",
 };
 
 let client: MongoClient;
