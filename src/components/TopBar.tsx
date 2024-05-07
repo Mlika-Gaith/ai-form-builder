@@ -30,7 +30,7 @@ const TopBar = ({ isOpen, toggle, session }: Props) => {
         <ul className="grid grid-cols-1 grid-rows-6 text-center ">
           <Link
             className="flex items-center justify-center text-md decoration-none list-none delay-200 ease-in-out hover:text-brand"
-            href="#"
+            href="/dashboard"
           >
             Dashboard
           </Link>

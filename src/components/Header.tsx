@@ -46,7 +46,7 @@ export const Header: React.FC = (props: Props) => {
                 onClick={toggle}
               />
             </Button>
-            <Link href="/view-froms" className="hidden md:flex">
+            <Link href="/dashboard" className="hidden md:flex">
               <Button variant="outline">Dashboard</Button>
             </Link>
             <Button
@@ -62,7 +62,7 @@ export const Header: React.FC = (props: Props) => {
                 alt={session.user.name}
                 width={32}
                 height={32}
-                className="hidden md:flex rounded-full mr-2"
+                className="hidden md:flex rounded-full mr-3"
               />
             )}
           </div>
