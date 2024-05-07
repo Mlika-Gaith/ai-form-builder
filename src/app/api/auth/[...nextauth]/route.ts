@@ -1,3 +1,4 @@
+import mongoDBAdapter from "@/db/mongoDBAdapter";
 import NextAuth, { Session, User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
