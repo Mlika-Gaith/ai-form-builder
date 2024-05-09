@@ -7,17 +7,14 @@ interface VerificationTokenDocument extends Document {
   expires: Date;
 }
 
-const verificationTokenSchema = new Schema<VerificationTokenDocument>({
+const VerificationTokenSchema = new Schema<VerificationTokenDocument>({
   identifier: { type: String, required: true },
   token: { type: String, required: true },
   expires: { type: Date, required: true },
 });
 
 // Define compound key for the schema
-verificationTokenSchema.index({ identifier: 1, token: 1 }, { unique: true });
+VerificationTokenSchema.index({ identifier: 1, token: 1 }, { unique: true });
 
-const VerificationToken = mongoose.model<VerificationTokenDocument>(
-  "VerificationToken",
-  verificationTokenSchema
-);
-export default VerificationToken;
+export default mongoose.models?.VerificationToken ||
+  mongoose.model("VerificationToken", VerificationTokenSchema);

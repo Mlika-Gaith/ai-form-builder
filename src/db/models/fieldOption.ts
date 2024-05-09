@@ -7,14 +7,14 @@ interface FieldOptionDocument extends Document {
   questionId?: number;
 }
 
-const fieldOptionSchema = new Schema<FieldOptionDocument>({
+const FieldOptionSchema = new Schema<FieldOptionDocument>({
   text: String,
   value: String,
   questionId: Number,
 });
 
 // Define relations between FieldOption and Question
-fieldOptionSchema.virtual("question", {
+FieldOptionSchema.virtual("question", {
   ref: "Question",
   localField: "questionId",
   foreignField: "_id",
@@ -22,11 +22,8 @@ fieldOptionSchema.virtual("question", {
 
 // Populate the virtual field when querying fieldOptions
 // Include in response but they are not stored in db
-fieldOptionSchema.set("toObject", { virtuals: true });
-fieldOptionSchema.set("toJSON", { virtuals: true });
+FieldOptionSchema.set("toObject", { virtuals: true });
+FieldOptionSchema.set("toJSON", { virtuals: true });
 
-const FieldOption = mongoose.model<FieldOptionDocument>(
-  "FieldOption",
-  fieldOptionSchema
-);
-export default FieldOption;
+export default mongoose.models?.FieldOption ||
+  mongoose.model("FieldOption", FieldOptionSchema);

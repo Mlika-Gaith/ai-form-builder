@@ -8,7 +8,7 @@ interface AnswerDocument extends Document {
   fieldOptionsId?: number;
 }
 
-const answerSchema = new Schema<AnswerDocument>({
+const AnswerSchema = new Schema<AnswerDocument>({
   value: String,
   questionId: Number,
   formSubmissionId: Number,
@@ -16,19 +16,19 @@ const answerSchema = new Schema<AnswerDocument>({
 });
 
 // Define answers relations with other entities
-answerSchema.virtual("question", {
+AnswerSchema.virtual("question", {
   ref: "Question",
   localField: "questionId",
   foreignField: "_id",
 });
 
-answerSchema.virtual("formSubmission", {
+AnswerSchema.virtual("formSubmission", {
   ref: "FormSubmission",
   localField: "FormSubmissionId",
   foreignField: "_id",
 });
 
-answerSchema.virtual("fieldOption", {
+AnswerSchema.virtual("fieldOption", {
   ref: "FieldOption",
   localField: "fieldOptionsId",
   foreignField: "_id",
@@ -36,8 +36,8 @@ answerSchema.virtual("fieldOption", {
 
 // Populate the virtual fields when querying answers
 // Include in response but they are not stored in db
-answerSchema.set("toObject", { virtuals: true });
-answerSchema.set("toJSON", { virtuals: true });
+AnswerSchema.set("toObject", { virtuals: true });
+AnswerSchema.set("toJSON", { virtuals: true });
 
-const Answer = mongoose.model<AnswerDocument>("Answer", answerSchema);
-export default Answer;
+export default mongoose.models?.Answer ||
+  mongoose.model("Answer", AnswerSchema);

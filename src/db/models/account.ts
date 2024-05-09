@@ -15,7 +15,7 @@ interface Account extends Document {
   session_state?: string;
 }
 
-const accountSchema = new Schema<Account>({
+const AccountSchema = new Schema<Account>({
   userId: { type: String, required: true },
   type: { type: String, required: true },
   provider: { type: String, required: true },
@@ -29,6 +29,5 @@ const accountSchema = new Schema<Account>({
   session_state: String,
 });
 
-const Account = mongoose.model<Account>("Account", accountSchema);
-
-export default Account;
+export default mongoose.models?.Account ||
+  mongoose.model("Account", AccountSchema);

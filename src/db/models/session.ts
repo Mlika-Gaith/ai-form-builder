@@ -7,11 +7,11 @@ interface SessionDocument extends Document {
   expires: Date;
 }
 
-const sessionSchema = new Schema<SessionDocument>({
+const SessionSchema = new Schema<SessionDocument>({
   sessionToken: { type: String, required: true, unique: true },
   userId: { type: String, required: true },
   expires: { type: Date, required: true },
 });
 
-const Session = mongoose.model<SessionDocument>("Session", sessionSchema);
-export default Session;
+export default mongoose.models?.Session ||
+  mongoose.model("Session", SessionSchema);

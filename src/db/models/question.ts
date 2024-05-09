@@ -6,26 +6,26 @@ interface QuestionDocument extends Document {
   fieldType?: string;
   formId?: number;
 }
-const questionSchema = new Schema<QuestionDocument>({
+const QuestionSchema = new Schema<QuestionDocument>({
   text: String,
   fieldType: String,
   formId: Number,
 });
 
 // Define relations for questions
-questionSchema.virtual("form", {
+QuestionSchema.virtual("form", {
   ref: "Form",
   localField: "formId",
   foreignField: "_id",
 });
 
-questionSchema.virtual("fieldOptions", {
+QuestionSchema.virtual("fieldOptions", {
   ref: "FieldOption",
   localField: "_id",
   foreignField: "questionId",
 });
 
-questionSchema.virtual("answers", {
+QuestionSchema.virtual("answers", {
   ref: "Answer",
   localField: "_id",
   foreignField: "questionId",
@@ -33,8 +33,8 @@ questionSchema.virtual("answers", {
 
 // Populate the virtual fields when querying questions
 // Include them in response but they are not stored in db
-questionSchema.set("toObject", { virtuals: true });
-questionSchema.set("toJSON", { virtuals: true });
+QuestionSchema.set("toObject", { virtuals: true });
+QuestionSchema.set("toJSON", { virtuals: true });
 
-const Question = mongoose.model<QuestionDocument>("Question", questionSchema);
-export default Question;
+export default mongoose.models?.Question ||
+  mongoose.model("Question", QuestionSchema);
