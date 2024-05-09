@@ -1,6 +1,7 @@
 "use client";
 import DashboardNav from "@/components/DashboardNav";
 import { Header } from "@/components/Header";
+import UpgradePlanBtn from "@/components/UpgradePlanBtn";
 import { SidebarNavItem } from "@/types/nav-types";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
@@ -27,6 +28,11 @@ const dashboardConfig: { sidebarNav: SidebarNavItem[] } = {
       icon: "lineChart",
     },
     {
+      title: "Charts",
+      href: "/charts",
+      icon: "pieChart",
+    },
+    {
       title: "Settings",
       href: "/settings",
       icon: "settings",
@@ -45,6 +51,8 @@ const layout = ({ children }: Props) => {
             <aside className="group flex flex-col gap-4 py-2 px-2 data-[collapsed=true]:py-2">
               {/* Side Navigation */}
               <DashboardNav items={dashboardConfig.sidebarNav} />
+              {/* UpgradePlanBtn */}
+              <UpgradePlanBtn />
             </aside>
           </div>
         </div>

@@ -10,7 +10,7 @@ interface User extends Document {
   subscribed?: boolean;
 }
 
-const userSchema = new Schema<User>({
+const UserSchema = new Schema<User>({
   name: String,
   email: { type: String, required: true },
   emailVerified: Date,
@@ -18,7 +18,4 @@ const userSchema = new Schema<User>({
   stripeCustomerId: String,
   subscribed: Boolean,
 });
-
-const User = mongoose.model<User>("User", userSchema);
-
-export default User;
+export default mongoose.models?.User || mongoose.model("User", UserSchema);

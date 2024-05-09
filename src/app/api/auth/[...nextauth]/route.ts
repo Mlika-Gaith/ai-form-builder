@@ -1,11 +1,11 @@
-import NextAuth, { Session, User } from "next-auth";
+import NextAuth, { NextAuthOptions, Session, User } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import clientPromise from "@/db/mongoDBAdapter";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import type { Adapter } from "next-auth/adapters";
 
-export const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise) as Adapter,
   providers: [
     GoogleProvider({
@@ -23,7 +23,8 @@ export const handler = NextAuth({
   callbacks: {
     async session({ session, user }: { session: Session; user?: User }) {
       if (user && session?.user) {
-        session.user.name = user.id;
+        // @ts-ignore
+        session.user.id = user.id;
       }
       return session;
     },
@@ -31,6 +32,9 @@ export const handler = NextAuth({
       return baseUrl;
     },
   },
-});
+};
 
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions);
+const auth = NextAuth(authOptions);
+
+export { handler as GET, handler as POST, auth };
