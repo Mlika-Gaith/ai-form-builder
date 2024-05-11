@@ -4,12 +4,12 @@ import mongoose, { Schema, Document } from "mongoose";
 interface QuestionDocument extends Document {
   text?: string;
   fieldType?: string;
-  formId?: number;
+  formId?: string;
 }
 const QuestionSchema = new Schema<QuestionDocument>({
   text: String,
   fieldType: String,
-  formId: Number,
+  formId: String,
 });
 
 // Define relations for questions

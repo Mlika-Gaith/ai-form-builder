@@ -1,10 +1,11 @@
-import {Provider} from "@/components/Provider";
-import {Header} from "@/components/Header"
+"use client";
+import { Provider } from "@/components/Provider";
+import { Header } from "@/components/Header";
 
 export default function Home() {
   return (
-      <Provider>
-          <Header/>
-      </Provider>
+    <Provider>
+      <Header />
+    </Provider>
   );
 }

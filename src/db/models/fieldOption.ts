@@ -4,13 +4,13 @@ import mongoose, { Schema, Document } from "mongoose";
 interface FieldOptionDocument extends Document {
   text?: string;
   value?: string;
-  questionId?: number;
+  questionId?: string;
 }
 
 const FieldOptionSchema = new Schema<FieldOptionDocument>({
   text: String,
   value: String,
-  questionId: Number,
+  questionId: String,
 });
 
 // Define relations between FieldOption and Question
