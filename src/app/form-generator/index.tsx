@@ -16,11 +16,6 @@ import { MoveRight, ChevronRight } from "lucide-react";
 
 type Props = {};
 
-const initialState: {
-  message: string;
-  data?: any;
-} = { message: "" };
-
 export function SubmitButton() {
   // a Hook that gives you status information of the last form submission.
   const { pending } = useFormStatus();
@@ -36,10 +31,14 @@ export function SubmitButton() {
 }
 
 const FormGenerator = ({}: Props) => {
-  // is a Hook that allows you to update state based on the result of a form action.
+  const { data: session } = useSession();
+  const initialState: {
+    message: string;
+    data?: any;
+  } = { message: "" };
+
   const [state, formAction] = useFormState(generateForm, initialState);
   const [open, setOpen] = useState(false);
-  const { data: session } = useSession();
   useEffect(() => {
     if (state?.message === "success") {
       setOpen(false);

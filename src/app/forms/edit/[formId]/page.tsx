@@ -19,39 +19,38 @@ const Page = ({ params }: { params: { formId: string } }) => {
     };
     getRequests();
   }, [userId]);
-  if (!formId) {
-    return (
-      <>
-        <header className="border bottom-1 w-full">
-          <nav className="border-gray-200 px-4 py-2.5 flex justify-center max-w-[1300px] mx-auto">
-            <div className="flex flex-wrap justify-between items-center mr-auto max-w-screen-xl">
-              <Wrench
-                size={22}
-                strokeWidth={1.5}
-                className="dark:white light:black"
-              />
-              <h2 className="text-md font-bold text dark-white ml-2">
-                AI Form Builder
-              </h2>
-            </div>
-          </nav>
-        </header>
+
+  return (
+    <>
+      <header className="border bottom-1 w-full">
+        <nav className="border-gray-200 px-4 py-2.5 flex justify-center max-w-[1300px] mx-auto">
+          <div className="flex flex-wrap justify-between items-center mr-auto max-w-screen-xl">
+            <Wrench
+              size={22}
+              strokeWidth={1.5}
+              className="dark:white light:black"
+            />
+            <h2 className="text-md font-bold text dark-white ml-2">
+              AI Form Builder
+            </h2>
+          </div>
+        </nav>
+      </header>
+      {!formId && (
         <div className="w-full min-h-[90vh] flex items-center justify-center ">
           <Alert variant="default" className="w-[50%]">
-            <AlertTitle>Success</AlertTitle>
+            <AlertTitle>Fail</AlertTitle>
             <AlertDescription>
-              For Not Found.
+              Form Not Found.
               <Link href="/dashboard" className="underline">
                 Go back to dashboard
               </Link>{" "}
             </AlertDescription>
           </Alert>
         </div>
-      </>
-    );
-  }
-
-  return <div>page</div>;
+      )}
+    </>
+  );
 };
 
 export default Page;

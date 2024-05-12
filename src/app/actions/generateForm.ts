@@ -8,6 +8,8 @@ import Form from "@/db/models/formDocument";
 import OpenAI from "openai";
 import Question from "@/db/models/question";
 import FieldOption from "@/db/models/fieldOption";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 type GenerateFormFunction = (
   prevState: { message: string; data?: any },
@@ -27,7 +29,9 @@ export const generateForm: GenerateFormFunction = async (
     console.error(parse.error);
     return { message: "Failed to parse data." };
   }
-
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
+  console.log(session);
   if (!process.env.OPENAI_API_KEY) {
     return {
       message: "NO OpenAI API key found.",
@@ -59,7 +63,7 @@ export const generateForm: GenerateFormFunction = async (
     const newForm = new Form({
       name: surveyObject.name,
       description: surveyObject.description,
-      questions: surveyObject.questions,
+      userId: userId,
     });
     await connectToDB();
     await newForm.save();
