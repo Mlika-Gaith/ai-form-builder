@@ -3,16 +3,16 @@ import mongoose, { Schema, Document } from "mongoose";
 // Mongoose schema for answers
 interface AnswerDocument extends Document {
   value?: string;
-  questionId?: number;
-  formSubmissionId?: number;
-  fieldOptionsId?: number;
+  questionId?: string;
+  formSubmissionId?: string;
+  fieldOptionsId?: string;
 }
 
 const AnswerSchema = new Schema<AnswerDocument>({
   value: String,
-  questionId: Number,
-  formSubmissionId: Number,
-  fieldOptionsId: Number,
+  questionId: String,
+  formSubmissionId: String,
+  fieldOptionsId: String,
 });
 
 // Define answers relations with other entities

@@ -10,6 +10,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormField as MyFormField } from "./FormField";
 import { publishForm } from "../actions/mutateForm";
+import FormPublishSuccess from "./FormPublishSuccess";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   form: FormModel;
@@ -24,25 +26,29 @@ const Form = (props: Props) => {
     setSuccessDialogOpen(open);
   };
   const onSubmit = async (data: any) => {
-    console.log(data);
+    console.log("DATA: ", data);
     if (props.editMode) {
-      //await publishForm(props.form?._id);
+      await publishForm(props.form?._id);
       setSuccessDialogOpen(true);
     } else {
       let answers = [];
+
       for (const [questionId, value] of Object.entries(data)) {
-        const id = parseInt(questionId.replace("question_", ""));
+        const id = questionId.replace("question_", "");
         let fieldOptionsId = null;
         let textValue = null;
         if (typeof value == "string" && value.includes("answerId_")) {
-          fieldOptionsId = parseInt(value.replace("answerId_", ""));
+          fieldOptionsId = value.replace("answerId_", "");
         } else {
           textValue = value as string;
         }
         answers.push({ questionId: id, fieldOptionsId, value: textValue });
+        console.log(answers);
       }
+
       const baseUrl =
         process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+
       const response = await fetch(`${baseUrl}/api/form/new`, {
         method: "POST",
         headers: {
@@ -62,7 +68,7 @@ const Form = (props: Props) => {
     <div className="text-center">
       <h1 className="text-lg font-bold py-3">{props.form.name}</h1>
       <h3 className="text-md">{props.form.description}</h3>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex min-h-screen flex-col items-center justify-between px-20 py-10">
         <FormComponent {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -94,8 +100,19 @@ const Form = (props: Props) => {
                 );
               }
             )}
+            <Button
+              type="submit"
+              className="whitespace-nowrap w-[30%] px-[30px] py-[12px] outline-none border-none flex justify-center items-center transition-all delay-300 ease-in-out hover:bg-foreground hover:text-background"
+            >
+              {props.editMode ? "Publish" : "Submit"}
+            </Button>
           </form>
         </FormComponent>
+        <FormPublishSuccess
+          formId={props.form._id}
+          open={successDialogOpen}
+          onOpenChange={handleDialogChange}
+        />
       </main>
     </div>
   );

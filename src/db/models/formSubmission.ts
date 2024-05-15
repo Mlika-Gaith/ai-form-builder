@@ -2,11 +2,11 @@ import mongoose, { Schema, Document } from "mongoose";
 
 // Mongoose schema for  form submissions
 interface FormSubmissionDocument extends Document {
-  formId?: number;
+  formId?: string;
 }
 
 const FormSubmissionSchema = new Schema<FormSubmissionDocument>({
-  formId: Number,
+  formId: String,
 });
 
 // Define form submissions relations
