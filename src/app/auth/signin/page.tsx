@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
-import { Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { FaGoogle } from "react-icons/fa";
 import { ClipLoader } from "react-spinners";
+import Header from "@/components/Header";
 
 // Define the type for providers
 type ProvidersType = Record<string, ClientSafeProvider> | null;
@@ -26,20 +26,7 @@ const SignIn = () => {
   if (providers != null) {
     return (
       <>
-        <header className="border bottom-1 w-full">
-          <nav className="border-gray-200 px-4 py-2.5 flex justify-center max-w-[1300px] mx-auto">
-            <div className="flex flex-wrap justify-between items-center mr-auto max-w-screen-xl">
-              <Wrench
-                size={22}
-                strokeWidth={1.5}
-                className="dark:white light:black"
-              />
-              <h2 className="text-md font-bold text dark-white ml-2">
-                AI Form Builder
-              </h2>
-            </div>
-          </nav>
-        </header>
+        <Header />
         <div className="w-full min-h-[90vh] flex items-center justify-center">
           <div className="rounded-xl border bg-card text-car-foreground shadow">
             <div className="flex flex-col p-6 space-y-1">

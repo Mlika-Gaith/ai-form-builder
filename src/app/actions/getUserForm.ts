@@ -2,6 +2,8 @@
 
 import { connectToDB } from "@/db/database";
 import Form from "@/db/models/formDocument";
+require("@/db/models/question");
+require("@/db/models/fieldOption");
 
 const getUserForm = async (formId: string) => {
   try {

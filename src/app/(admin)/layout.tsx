@@ -1,6 +1,6 @@
 "use client";
 import DashboardNav from "@/components/DashboardNav";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Navbar";
 import UpgradePlanBtn from "@/components/UpgradePlanBtn";
 import { SidebarNavItem } from "@/types/nav-types";
 import { SessionProvider } from "next-auth/react";
@@ -61,6 +61,7 @@ const layout = ({ children }: Props) => {
                   <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
                   <FormGenerator />
                 </div>
+                {children}
               </main>
             </div>
           </div>

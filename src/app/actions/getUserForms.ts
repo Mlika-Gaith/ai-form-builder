@@ -8,9 +8,11 @@ export async function getUserForms(userId: string) {
   }
   try {
     await connectToDB();
+    console.log(userId);
     const forms = await Form.find({ userId: userId });
-    return forms;
+    return JSON.parse(JSON.stringify(forms));
   } catch (error) {
     console.error("Error getting user forms.", error);
+    return JSON.parse(JSON.stringify([]));
   }
 }

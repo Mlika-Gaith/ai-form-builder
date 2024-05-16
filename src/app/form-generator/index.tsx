@@ -13,21 +13,14 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { MoveRight, ChevronRight } from "lucide-react";
+import CustomButton from "@/components/Button";
 
 type Props = {};
 
 export function SubmitButton() {
   // a Hook that gives you status information of the last form submission.
   const { pending } = useFormStatus();
-  return (
-    <Button
-      className="rounded-[50px] whitespace-nowrap px-[30px] py-[12px] outline-none border-none flex justify-center items-center transition-all delay-300 ease-in-out hover:bg-foreground hover:text-background"
-      type="submit"
-      disabled={pending}
-    >
-      {pending ? "Generating ..." : "Generate"}
-    </Button>
-  );
+  return <CustomButton pending={pending} />;
 }
 
 const FormGenerator = ({}: Props) => {
