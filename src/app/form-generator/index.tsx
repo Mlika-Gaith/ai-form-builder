@@ -14,8 +14,10 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { MoveRight, ChevronRight } from "lucide-react";
 import CustomButton from "@/components/Button";
-
-type Props = {};
+import { getUserSubscription } from "../actions/userSubscription";
+import { getUserForms } from "../actions/getUserForms";
+import MAX_FREE_FORMS from "@/utils/free-forms";
+import { Lock } from "lucide-react";
 
 export function SubmitButton() {
   // a Hook that gives you status information of the last form submission.
@@ -23,7 +25,19 @@ export function SubmitButton() {
   return <CustomButton pending={pending} />;
 }
 
-const FormGenerator = ({}: Props) => {
+const UpgradeButton = () => {
+  return (
+    <Button
+      disabled
+      className="rounded-[50px] whitespace-nowrap px-[30px] py-[12px] outline-none border-none flex justify-center items-center transition-all delay-300 ease-in-out hover:bg-foreground hover:text-background"
+    >
+      <Lock className="w-4 h-4 mr-2" />
+      Upgrade Plan
+    </Button>
+  );
+};
+
+const FormGenerator = () => {
   const { data: session } = useSession();
   const initialState: {
     message: string;
@@ -47,45 +61,64 @@ const FormGenerator = ({}: Props) => {
       signIn();
     }
   };
+  const [subscription, setSubscription] = useState<any>(null);
+  const [forms, setForms] = useState<FormDocument[]>([]);
+  //@ts-ignore
+  const userId = session?.user?._id;
+  useEffect(() => {
+    const getRequests = async () => {
+      const sub = await getUserSubscription(userId);
+      const forms = await getUserForms(userId);
+      setSubscription(sub);
+      setForms(forms);
+    };
+    getRequests();
+  }, [userId]);
+
   const [hover, setHover] = useState(false);
   const onHover = () => {
     setHover(!hover);
   };
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <Button
-        onClick={onFormCreate}
-        className="rounded-[50px] whitespace-nowrap px-[30px] py-[12px] outline-none border-none flex justify-center items-center transition-all delay-300 ease-in-out hover:bg-foreground hover:text-background"
-        onMouseEnter={onHover}
-        onMouseLeave={onHover}
-      >
-        Create Form{" "}
-        {hover ? (
-          <MoveRight size={20} className="ml-2" />
-        ) : (
-          <ChevronRight size={20} className="ml-2" />
-        )}
-      </Button>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Create New Form</DialogTitle>
-        </DialogHeader>
-        <form action={formAction}>
-          <div className="grid gap-4 py-4">
-            <Textarea
-              id="description"
-              name="description"
-              required
-              placeholder="Share what your form is about, who is it for, and what information you would like to collect. And AI will do the magic ✨"
-            />
-          </div>
-          <DialogFooter>
-            <SubmitButton />
-            <Button variant="link">Create Manually</Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
+  const userFormsCount = forms.length;
+  if (!subscription && userFormsCount == MAX_FREE_FORMS) {
+    return <UpgradeButton />;
+  } else {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <Button
+          onClick={onFormCreate}
+          className="rounded-[50px] whitespace-nowrap px-[30px] py-[12px] outline-none border-none flex justify-center items-center transition-all delay-300 ease-in-out hover:bg-foreground hover:text-background"
+          onMouseEnter={onHover}
+          onMouseLeave={onHover}
+        >
+          Create Form{" "}
+          {hover ? (
+            <MoveRight size={20} className="ml-2" />
+          ) : (
+            <ChevronRight size={20} className="ml-2" />
+          )}
+        </Button>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Create New Form</DialogTitle>
+          </DialogHeader>
+          <form action={formAction}>
+            <div className="grid gap-4 py-4">
+              <Textarea
+                id="description"
+                name="description"
+                required
+                placeholder="Share what your form is about, who is it for, and what information you would like to collect. And AI will do the magic ✨"
+              />
+            </div>
+            <DialogFooter>
+              <SubmitButton />
+              <Button variant="link">Create Manually</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 };
 export default FormGenerator;

@@ -5,9 +5,9 @@ import React, { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import SubscribeBtn from "@/app/stripe-subscription/SubscribeBtn";
 import { ClipLoader } from "react-spinners";
+import MAX_FREE_FORMS from "@/utils/free-forms";
 
 type Props = {};
-const MAX_FREE_FORMS = 5;
 
 const UpgradePlanBtn = (props: Props) => {
   const { data: session } = useSession();
@@ -38,7 +38,7 @@ const UpgradePlanBtn = (props: Props) => {
     );
   }
   const formCount = forms ? forms.length : 0;
-  const percentage = formCount ? formCount / MAX_FREE_FORMS : 0;
+  const percentage = formCount ? (formCount / MAX_FREE_FORMS) * 100 : 0;
   if (!userId || !loaded) {
     return (
       <div className="w-full flex mx-2 p-4 justify-start">
