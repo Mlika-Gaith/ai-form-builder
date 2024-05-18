@@ -23,6 +23,7 @@ type Props = {
       | string
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
+      | React.FormEvent<HTMLButtonElement>
   ) => void;
 };
 
@@ -33,14 +34,14 @@ export const FormField = ({ element, value, onChange }: Props) => {
     Switch: () => (
       <React.Fragment>
         {"   "}
-        <Switch />
+        <Switch onChange={onChange} checked={value} />
       </React.Fragment>
     ),
     Textarea: () => <Textarea onChange={onChange} />,
     Select: () => (
       <Select onValueChange={onChange}>
         <SelectTrigger>
-          <SelectValue>Select an option</SelectValue>
+          <SelectValue placeholder="select an option" />
         </SelectTrigger>
         <SelectContent>
           {element.fieldOptions.map((option, index) => (

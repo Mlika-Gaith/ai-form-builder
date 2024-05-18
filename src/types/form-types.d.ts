@@ -33,3 +33,24 @@ type QuestionWithOptionsModel = Question & {
 type FormModel = FormDocument & {
   questions: Array<QuestionWithOptionsModel>;
 };
+
+type Answer = {
+  _id: {
+    $oid: string;
+  };
+  value?: string;
+  questionId?: string;
+  FormSubmissionId?: string;
+  FieldOptionsId?: string;
+};
+
+type FormSubmission = {
+  _id: {
+    $oid: string;
+  };
+  formId?: string;
+};
+
+type FormSubmissionWithAnswers = FormSubmission & {
+  answers: Answer[];
+};

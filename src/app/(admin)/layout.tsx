@@ -44,8 +44,8 @@ const dashboardConfig: { sidebarNav: SidebarNavItem[] } = {
 const layout = ({ children }: Props) => {
   return (
     <SessionProvider>
-      <div className="flex min-h-screen flex-col space-y-6">
-        <Header />
+      <Header />
+      <div className="flex min-h-screen flex-col space-y-6 my-4">
         <div className="container relative">
           <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow">
             <div className="flex-row md:flex">

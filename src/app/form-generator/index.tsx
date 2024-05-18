@@ -12,12 +12,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
-import { MoveRight, ChevronRight } from "lucide-react";
+import { MoveRight, ChevronRight, Lock } from "lucide-react";
 import CustomButton from "@/components/Button";
 import { getUserSubscription } from "../actions/userSubscription";
 import { getUserForms } from "../actions/getUserForms";
 import MAX_FREE_FORMS from "@/utils/free-forms";
-import { Lock } from "lucide-react";
 
 export function SubmitButton() {
   // a Hook that gives you status information of the last form submission.

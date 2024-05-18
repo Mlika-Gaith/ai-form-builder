@@ -30,6 +30,7 @@ export const generateForm: GenerateFormFunction = async (
     return { message: "Failed to parse data." };
   }
   const session = await getServerSession(authOptions);
+  //@ts-ignore
   const userId = session?.user?.id;
   console.log(session);
   if (!process.env.OPENAI_API_KEY) {
@@ -42,7 +43,7 @@ export const generateForm: GenerateFormFunction = async (
   const promptExplanation = PROMPT_EXPLANATION;
 
   const openai = new OpenAI({
-    apiKey: "anything",
+    apiKey: process.env.OPENAI_API_KEY,
     baseURL: "http://localhost:3040/v1",
   });
 
@@ -52,13 +53,16 @@ export const generateForm: GenerateFormFunction = async (
     ],
     model: "gpt-3.5-turbo",
   });
+  console.log(chatCompletion);
   const content = chatCompletion.choices[0].message.content;
+
   const jsonStartIndex = content?.indexOf("{");
   const jsonEndIndex = content?.lastIndexOf("}");
   //@ts-ignore
   const jsonString = content?.substring(jsonStartIndex, jsonEndIndex + 1);
   //@ts-ignore
   const surveyObject = JSON.parse(jsonString);
+
   try {
     const newForm = new Form({
       name: surveyObject.name,
