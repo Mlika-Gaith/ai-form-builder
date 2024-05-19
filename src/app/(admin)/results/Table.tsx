@@ -31,7 +31,7 @@ const columnHelper = createColumnHelper<any>();
 
 const Table = (props: TableProps) => {
   const { data } = props;
-  //console.log("DATA : ", data);
+
   const columns = [
     columnHelper.accessor("id", {
       cell: (info) => info.getValue(),

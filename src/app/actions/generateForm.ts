@@ -43,7 +43,7 @@ export const generateForm: GenerateFormFunction = async (
   const promptExplanation = PROMPT_EXPLANATION;
 
   const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: "anything",
     baseURL: "http://localhost:3040/v1",
   });
 
