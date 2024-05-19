@@ -44,23 +44,8 @@ const Page = ({ params }: { params: { formId: string } }) => {
           </Alert>
         </div>
       )}
-      {status !== "loading" && userId !== form?.userId && (
-        <div className="w-full min-h-[90vh] flex items-center justify-center ">
-          <Alert variant="default" className="w-[50%]">
-            <AlertTitle>Unauthorized</AlertTitle>
-            <AlertDescription>
-              You are not authorized to view this page.
-              <Link href="/dashboard" className="underline">
-                {" "}
-                Go back to dashboard
-              </Link>{" "}
-            </AlertDescription>
-          </Alert>
-        </div>
-      )}
-      {status !== "loading" && userId === form?.userId && form && (
-        <Form form={form as FormModel} />
-      )}
+
+      {status !== "loading" && form && <Form form={form as FormModel} />}
     </>
   );
 };

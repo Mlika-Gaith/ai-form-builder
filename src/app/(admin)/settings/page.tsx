@@ -29,7 +29,8 @@ const Settings = (props: Props) => {
       <h1 className="text-4xl mb-3 capitalize">Subscription details</h1>
       <p className="text-foreground text-sm">You are currently on a {plan}.</p>
       <div className="my-2">
-        user?.subscribed ? <ManageSubscription /> : <SubscribeBtn />
+        user?.subscribed ? <ManageSubscription /> :{" "}
+        <SubscribeBtn price="price_1PEWfoBf1otR0ufwptHXU4BX" userId={userId} />
       </div>
     </div>
   );
