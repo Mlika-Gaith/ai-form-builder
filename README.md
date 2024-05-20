@@ -2,6 +2,8 @@
 
 AI Form Builder is a project designed to help users easily generate forms or surveys on any topic using AI. It leverages the power of OpenAI's GPT-3.5 model to understand the context and generate relevant questions.
 
+![Screenshot of the application](public/images/app.png)
+
 ## Technologies Used
 
 - Next.js: A React framework for building modern web applications.

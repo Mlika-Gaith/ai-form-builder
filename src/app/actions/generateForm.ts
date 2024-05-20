@@ -43,8 +43,8 @@ export const generateForm: GenerateFormFunction = async (
   const promptExplanation = PROMPT_EXPLANATION;
 
   const openai = new OpenAI({
-    apiKey: "anything",
-    baseURL: "http://localhost:3040/v1",
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: process.env.OPENAI_API_URL,
   });
 
   const chatCompletion = await openai.chat.completions.create({
