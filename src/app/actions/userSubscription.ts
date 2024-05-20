@@ -32,7 +32,6 @@ export async function getUserSubscription(userId: string) {
   try {
     await connectToDB();
     const user = await User.findOne({ _id: userId });
-    console.log("USER: ", user);
     return user ? user.subscribed : null;
   } catch (error) {
     console.error("Error getting subscription status.", error);
