@@ -41,7 +41,7 @@ Follow these steps to get the project up and running on your local machine:
 1. Clone the repository:
 
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/Mlika-Gaith/ai-form-builder.git
    ```
 
 2. Navigate into the project directory:
