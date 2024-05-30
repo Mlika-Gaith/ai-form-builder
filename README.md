@@ -7,7 +7,6 @@ AI Form Builder is a project designed to help users easily generate forms or sur
 ## Technologies Used
 
 - Next.js: A React framework for building modern web applications.
-- Express.js: A minimal and flexible Node.js web application framework.
 - MongoDB: A source-available cross-platform document-oriented database program.
 - Mongoose: An Object Data Modeling (ODM) library for MongoDB and Node.js.
 - OpenAI API: An AI model that can generate human-like text.
