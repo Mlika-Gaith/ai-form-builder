@@ -33,7 +33,7 @@ export const generateForm: GenerateFormFunction = async (
   //@ts-ignore
   const userId = session?.user?.id;
   console.log(session);
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.OPEN_ROUTER_API_KEY) {
     return {
       message: "NO OpenAI API key found.",
     };
@@ -43,18 +43,19 @@ export const generateForm: GenerateFormFunction = async (
   const promptExplanation = PROMPT_EXPLANATION;
 
   const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-    baseURL: process.env.OPENAI_API_URL,
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: process.env.OPEN_ROUTER_API_KEY,
   });
 
-  const chatCompletion = await openai.chat.completions.create({
+  const completion = await openai.chat.completions.create({
+    model: "microsoft/phi-3-medium-128k-instruct:free",
     messages: [
       { role: "system", content: `${data.description} ${promptExplanation}` },
     ],
-    model: "gpt-3.5-turbo",
   });
-  console.log(chatCompletion);
-  const content = chatCompletion.choices[0].message.content;
+
+  console.log(completion);
+  const content = completion?.choices[0].message.content;
 
   const jsonStartIndex = content?.indexOf("{");
   const jsonEndIndex = content?.lastIndexOf("}");
