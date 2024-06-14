@@ -10,7 +10,7 @@ type Form =
   | undefined;
 
 type Props = {
-  formId: { $oid: string };
+  formId: { $oid: string } | string;
 };
 
 const ResultsDisplay = ({ formId }: Props) => {

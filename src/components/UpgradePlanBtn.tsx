@@ -41,7 +41,7 @@ const UpgradePlanBtn = (props: Props) => {
   const percentage = formCount ? (formCount / MAX_FREE_FORMS) * 100 : 0;
   if (!userId || !loaded) {
     return (
-      <div className="w-full flex mx-2 p-4 justify-start">
+      <div className="size-full flex  items-center justify-center">
         <ClipLoader color="#3B82F6" size={25} aria-label="Please wait..." />
       </div>
     );

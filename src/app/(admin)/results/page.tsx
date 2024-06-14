@@ -42,9 +42,7 @@ const Page = ({
       <FormsPicker options={selectOptions} />
       <ResultsDisplay
         formId={
-          searchParams?.formId
-            ? parseInt(searchParams.formId as string)
-            : forms[0]._id
+          searchParams?.formId ? (searchParams.formId as string) : forms[0]._id
         }
       />
     </div>
