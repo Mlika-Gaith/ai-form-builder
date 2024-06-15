@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { formatDistanceToNow } from "date-fns";
 
 type Props = {
   forms: FormDocument[] | null;
@@ -9,6 +10,9 @@ const FormList = ({ forms }: Props) => {
   return (
     <div className="grid grid-cols1 md:grid-cols-3 m-5 p-4 gap-4">
       {forms?.map((form: FormDocument) => {
+        const formattedDate = formatDistanceToNow(new Date(form.createdAt!), {
+          addSuffix: true,
+        });
         return (
           <div
             key={form._id.toString()}
@@ -19,7 +23,7 @@ const FormList = ({ forms }: Props) => {
                 <div className="flex items-center gap-2">
                   <p className="font-semibold text-md">{form.name}</p>
                   <p className="ml-auto text-xs text-foreground">
-                    7 months ago
+                    {formattedDate}
                   </p>
                 </div>
               </div>

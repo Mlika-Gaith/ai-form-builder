@@ -6,7 +6,6 @@ import { SidebarNavItem } from "@/types/nav-types";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
 import FormGenerator from "../form-generator";
-import { CircleChevronDown } from "lucide-react";
 
 type Props = {
   children: React.ReactNode;

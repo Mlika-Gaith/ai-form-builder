@@ -6,6 +6,7 @@ type FormDocument = {
   description?: string;
   userId?: string;
   published?: boolean;
+  createdAt?: Date;
 };
 
 type Question = {

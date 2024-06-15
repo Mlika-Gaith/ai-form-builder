@@ -6,6 +6,7 @@ interface FormDocument extends Document {
   description?: string;
   userId?: string;
   published?: boolean;
+  createdAt?: Date;
 }
 
 const FormSchema = new Schema<FormDocument>({
@@ -13,6 +14,10 @@ const FormSchema = new Schema<FormDocument>({
   description: String,
   userId: String,
   published: Boolean,
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Define relations for form
