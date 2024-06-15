@@ -13,7 +13,7 @@ const DashboardNav = ({ items }: Props) => {
   const path = usePathname();
   if (!items.length) return null;
   return (
-    <nav className="min-h-[80%]">
+    <nav className="size-full">
       {items.map((item, index) => {
         const iconKey = item?.icon as keyof typeof Icons;
         const Icon = Icons[iconKey || "list"];

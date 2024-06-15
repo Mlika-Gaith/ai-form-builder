@@ -22,9 +22,12 @@ export const Header: React.FC = (props: Props) => {
   };
   return (
     <header className="border bottom-1 w-full">
-      <TopBar isOpen={isOpen} toggle={toggle} session={session} />
+      <TopBar isOpen={isOpen} toggle={toggle} />
       <nav className="border-gray-200 px-4 py-2.5 flex justify-center max-w-[1300px] mx-auto">
-        <div className="flex flex-wrap justify-betwen items-center mr-auto max-w-screen-xl">
+        <Link
+          className="flex flex-wrap justify-between items-center mr-auto max-w-screen-xl"
+          href="/"
+        >
           <Wrench
             size={22}
             strokeWidth={1.5}
@@ -33,7 +36,7 @@ export const Header: React.FC = (props: Props) => {
           <h2 className="text-md font-bold text dark-white ml-2">
             AI Form Builder
           </h2>
-        </div>
+        </Link>
         {session?.user ? (
           <div className="flex items-center gap-4">
             <Button

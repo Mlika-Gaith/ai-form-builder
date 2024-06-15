@@ -1,19 +1,17 @@
 import { X } from "lucide-react";
-import { Session } from "next-auth";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 type Props = {
   isOpen: boolean;
   toggle: () => void;
-  session: Session | null;
 };
 
 const handleSignOut = async () => {
   await signOut();
 };
 
-const TopBar = ({ isOpen, toggle, session }: Props) => {
+const TopBar = ({ isOpen, toggle }: Props) => {
   return (
     <div
       className="fixed w-full h-full grid items-center top-0 left-0 ease-in-out delay-300 bg-background"
@@ -31,8 +29,24 @@ const TopBar = ({ isOpen, toggle, session }: Props) => {
           <Link
             className="flex items-center justify-center text-md decoration-none list-none delay-200 ease-in-out hover:text-brand"
             href="/dashboard"
+            onClick={toggle}
           >
             Dashboard
+          </Link>
+
+          <Link
+            className="flex items-center justify-center text-md decoration-none list-none delay-200 ease-in-out hover:text-brand"
+            href="/results"
+            onClick={toggle}
+          >
+            Results
+          </Link>
+          <Link
+            className="flex items-center justify-center text-md decoration-none list-none delay-200 ease-in-out hover:text-brand"
+            href="/settings"
+            onClick={toggle}
+          >
+            Settings
           </Link>
           <span
             className="flex items-center justify-center text-md light:text-black dark:text-white decoration-none list-none delay-200 ease-in-out hover:text-brand cursor-pointer"

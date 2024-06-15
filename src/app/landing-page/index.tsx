@@ -31,7 +31,7 @@ const LandingPage = (props: Props) => {
           How it works
         </h2>
         <ul className="grid gap-4grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl text-center">
-          <li className="flex flex-col items-center space-y-4 relative">
+          <li className="flex flex-col items-center space-y-4 relative max-sm:mb-4">
             <Image
               src="/images/demo1.png"
               width="300"
@@ -44,7 +44,7 @@ const LandingPage = (props: Props) => {
               Add a prompt and describe the requirements for your form.
             </p>
           </li>
-          <li className="flex flex-col items-center space-y-4 relative">
+          <li className="flex flex-col items-center space-y-4 relative max-sm:mb-4">
             <Image
               src="/images/demo2.png"
               width="300"
@@ -64,7 +64,7 @@ const LandingPage = (props: Props) => {
               className="bg-transparent shadow-md rounded-md"
             />
 
-            <p className="text-gray-500 text-sm">
+            <p className="text-gray-500 text-sm max-sm:mb-4">
               Check form results and more.
             </p>
           </li>

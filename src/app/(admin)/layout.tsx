@@ -6,6 +6,7 @@ import { SidebarNavItem } from "@/types/nav-types";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
 import FormGenerator from "../form-generator";
+import { CircleChevronDown } from "lucide-react";
 
 type Props = {
   children: React.ReactNode;
@@ -35,21 +36,23 @@ const layout = ({ children }: Props) => {
   return (
     <SessionProvider>
       <Header />
-      <div className="flex min-h-screen flex-col space-y-6 my-4">
-        <div className="container relative">
-          <div className="overflow-hidden max-sm:overflow-auto rounded-[0.5rem] border bg-background shadow">
+      <div className="size-full flex min-h-screen flex-col space-y-6 my-4">
+        <div className="h-full container relative">
+          <div className="overflow-hidden max-sm:overflow-auto rounded-[0.5rem] border bg-background shadow max-sm:border-none">
             <div className="flex-row md:flex">
-              <aside className="h-full flex flex-col gap-4 max-sm:gap-1 py-2 max-sm:py-0 px-2 mr-2 border-r-[1px] max-sm:border-none">
+              <aside className="flex flex-col border-r-[1px] p-4 max-sm:hidden">
                 {/* Side Navigation */}
                 <DashboardNav items={dashboardConfig.sidebarNav} />
                 {/* UpgradePlanBtn */}
-                <div>
+                <div className="flex items-center justify-center pt-5">
                   <UpgradePlanBtn />
                 </div>
               </aside>
-              <main className="flex w-full flex-1 flex-col overflow-hidden py-4">
-                <div className="flex flex-col items-start px-4 py-10 border-b-[1px]">
-                  <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+              <main className="flex flex-1 flex-col overflow-hidden py-4">
+                <div className="flex flex-col items-start px-4 py-8 border-b-[1px] max-sm:py-0 max-sm:pb-4 max-sm:border-none">
+                  <h1 className="text-3xl font-bold mb-2 max-sm:mb-4">
+                    Dashboard
+                  </h1>
                   <FormGenerator />
                 </div>
                 {children}

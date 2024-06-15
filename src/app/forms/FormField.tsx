@@ -31,12 +31,7 @@ export const FormField = ({ element, value, onChange }: Props) => {
   if (!element) return null;
   const components: { [key: string]: () => JSX.Element } = {
     Input: () => <Input type="text" onChange={onChange} />,
-    Switch: () => (
-      <Switch
-        onChange={onChange}
-        checked={value} // Convert value to boolean for Switch
-      />
-    ),
+    Switch: () => <Switch />,
     Textarea: () => <Textarea onChange={onChange} />,
     Select: () => (
       <Select onValueChange={onChange}>
