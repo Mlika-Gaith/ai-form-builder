@@ -1,6 +1,6 @@
 # AI Form Builder
 
-AI Form Builder is a project designed to help users easily generate forms or surveys on any topic using AI. It leverages the power of OpenAI's GPT-3.5 model to understand the context and generate relevant questions.
+AI Form Builder is a project designed to help users easily generate forms or surveys on any topic using AI. It leverages the power of microsoft/phi-3-medium-128k-instruct model to understand the context and generate relevant questions.
 
 ![Screenshot of the application](public/images/app.png)
 
@@ -16,7 +16,7 @@ AI Form Builder is a project designed to help users easily generate forms or sur
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env.local file:
+To run this project, you will need to add the following environment variables to your .env.local file (also see .env.example):
 
 - `GOOGLE_ID`
 - `GOOGLE_SECRET`
@@ -30,8 +30,7 @@ To run this project, you will need to add the following environment variables to
 - `STRIPE_SECRET_KEY`
 - `STRIPE_WEBHOOK_SECRET`
 - `NEXT_PUBLIC_BASE_URL`
-- `OPENAI_API_KEY`
-- `OPENAI_API_URL`
+- `OPEN_ROUTER_API_KEY`
 
 ## Getting Started
 
@@ -62,3 +61,7 @@ Follow these steps to get the project up and running on your local machine:
    ```
 
 5. Open your browser and navigate to `http://localhost:3000`.
+
+## AI Model
+
+For more information about project AI model and how to get your API key visit ([OpenRouter](https://openrouter.ai/models/microsoft/phi-3-medium-128k-instruct:free))
