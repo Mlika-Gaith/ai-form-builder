@@ -10,10 +10,6 @@ import Header from "@/components/Header";
 // Define the type for providers
 type ProvidersType = Record<string, ClientSafeProvider> | null;
 
-const handleSignIn = async (id: any) => {
-  await signIn(id);
-};
-
 const SignIn = () => {
   const [providers, setProviders] = useState<ProvidersType>(null);
   useEffect(() => {
@@ -23,6 +19,13 @@ const SignIn = () => {
     };
     setUpProviders();
   }, []);
+  const handleSignIn = async (providerId: string) => {
+    // Clear current session and prompt for account selection for Google
+    await signIn(providerId, {
+      callbackUrl: `${window.location.origin}`,
+      ...(providerId === "google" && { prompt: "select_account" }),
+    });
+  };
   if (providers != null) {
     return (
       <>
@@ -36,7 +39,7 @@ const SignIn = () => {
               <p className="text-sm text-muted-foreground">Choose a provider</p>
             </div>
             <div className="p-6 pt-0 grid gap-4">
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-2 gap-6 max-sm:grid-cols-1">
                 {providers &&
                   Object.values(providers).map((provider) => {
                     return provider.id === "google" ? (

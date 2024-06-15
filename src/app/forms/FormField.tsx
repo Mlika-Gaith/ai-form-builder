@@ -32,10 +32,10 @@ export const FormField = ({ element, value, onChange }: Props) => {
   const components: { [key: string]: () => JSX.Element } = {
     Input: () => <Input type="text" onChange={onChange} />,
     Switch: () => (
-      <React.Fragment>
-        {"   "}
-        <Switch onChange={onChange} checked={value} />
-      </React.Fragment>
+      <Switch
+        onChange={onChange}
+        checked={value} // Convert value to boolean for Switch
+      />
     ),
     Textarea: () => <Textarea onChange={onChange} />,
     Select: () => (

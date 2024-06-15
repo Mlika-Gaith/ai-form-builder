@@ -32,8 +32,8 @@ const UpgradePlanBtn = (props: Props) => {
 
   if (subscription) {
     return (
-      <div className="p-4 mb-4 text-left text-sm">
-        <p className="mt-2 text-brand">Subscribed to Gold Plan.</p>
+      <div className="h-[4rem] flex items-center justify-center m-4 text-left text-sm max-sm:h-[2rem] max-sm:justify-start">
+        <p className="text-brand">Subscribed to Gold Plan.</p>
       </div>
     );
   }
@@ -41,19 +41,19 @@ const UpgradePlanBtn = (props: Props) => {
   const percentage = formCount ? (formCount / MAX_FREE_FORMS) * 100 : 0;
   if (!userId || !loaded) {
     return (
-      <div className="size-full flex  items-center justify-center">
+      <div className="h-[4rem] flex items-center justify-center max-sm:h-[2rem">
         <ClipLoader color="#3B82F6" size={25} aria-label="Please wait..." />
       </div>
     );
   }
 
   return (
-    <div className="p-4 mb-4 text-left text-xs">
+    <div className="h-[5rem] m-4 text-left text-xs">
       <Progress value={percentage} />
-      <p className="mt-2">
+      <p className="my-2">
         {formCount} out of {MAX_FREE_FORMS} generated.
       </p>
-      <div className="my-2">
+      <div className="my-4">
         <SubscribeBtn price="price_1PEWfoBf1otR0ufwptHXU4BX" userId={userId} />
       </div>
     </div>

@@ -39,7 +39,7 @@ const layout = ({ children }: Props) => {
         <div className="container relative">
           <div className="overflow-hidden max-sm:overflow-auto rounded-[0.5rem] border bg-background shadow">
             <div className="flex-row md:flex">
-              <aside className="group flex flex-col gap-4 max-sm:gap-1 py-2 max-sm:py-0 px-2 mr-2 border-r-[1px] max-sm:border-none">
+              <aside className="h-full flex flex-col gap-4 max-sm:gap-1 py-2 max-sm:py-0 px-2 mr-2 border-r-[1px] max-sm:border-none">
                 {/* Side Navigation */}
                 <DashboardNav items={dashboardConfig.sidebarNav} />
                 {/* UpgradePlanBtn */}
