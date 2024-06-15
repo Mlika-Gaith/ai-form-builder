@@ -9,7 +9,7 @@ import OpenAI from "openai";
 import Question from "@/db/models/question";
 import FieldOption from "@/db/models/fieldOption";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/utils/authOptions";
 
 type GenerateFormFunction = (
   prevState: { message: string; data?: any },
