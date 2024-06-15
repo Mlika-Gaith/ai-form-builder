@@ -42,7 +42,7 @@ const FormGenerator = () => {
     message: string;
     data?: any;
   } = { message: "" };
-
+  //@ts-ignore
   const [state, formAction] = useFormState(generateForm, initialState);
   const [open, setOpen] = useState(false);
   useEffect(() => {
@@ -112,7 +112,6 @@ const FormGenerator = () => {
             </div>
             <DialogFooter>
               <SubmitButton />
-              <Button variant="link">Create Manually</Button>
             </DialogFooter>
           </form>
         </DialogContent>

@@ -11,15 +11,10 @@ import FieldOption from "@/db/models/fieldOption";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 
-type GenerateFormFunction = (
+export const generateForm = async (
   prevState: { message: string; data?: any },
   formData: FormData
-) => Promise<{ message: string; data?: any } | undefined>;
-
-export const generateForm: GenerateFormFunction = async (
-  prevState: { message: string },
-  formData: FormData
-) => {
+): Promise<{ message: string; data?: any } | undefined> => {
   const schema = z.object({ description: z.string().min(1) });
   const parse = schema.safeParse({
     description: formData.get("description"),
@@ -29,10 +24,11 @@ export const generateForm: GenerateFormFunction = async (
     console.error(parse.error);
     return { message: "Failed to parse data." };
   }
+
   const session = await getServerSession(authOptions);
   //@ts-ignore
   const userId = session?.user?.id;
-  console.log(session);
+
   if (!process.env.OPEN_ROUTER_API_KEY) {
     return {
       message: "NO OpenAI API key found.",
@@ -54,15 +50,11 @@ export const generateForm: GenerateFormFunction = async (
     ],
   });
 
-  console.log(completion);
   const content = completion?.choices[0].message.content;
-
   const jsonStartIndex = content?.indexOf("{");
   const jsonEndIndex = content?.lastIndexOf("}");
-  //@ts-ignore
-  const jsonString = content?.substring(jsonStartIndex, jsonEndIndex + 1);
-  //@ts-ignore
-  const surveyObject = JSON.parse(jsonString);
+  const jsonString = content?.substring(jsonStartIndex!, jsonEndIndex! + 1);
+  const surveyObject = JSON.parse(jsonString!);
 
   try {
     const newForm = new Form({
@@ -70,6 +62,7 @@ export const generateForm: GenerateFormFunction = async (
       description: surveyObject.description,
       userId: userId,
     });
+
     await connectToDB();
     await newForm.save();
 
@@ -77,22 +70,23 @@ export const generateForm: GenerateFormFunction = async (
       const question = new Question({
         text: questionData.text,
         fieldType: questionData.fieldType,
-        formId: newForm._id, // Reference to the saved form
+        formId: newForm._id,
       });
       await question.save();
-      // Save field options
+
       for (const fieldOptionData of questionData.fieldOptions) {
         await FieldOption.create({
           text: fieldOptionData.text,
           value: fieldOptionData.value,
-          questionId: question._id, // Reference to the saved question
+          questionId: question._id,
         });
       }
     }
+
     const newFormObj = newForm.toObject();
-    console.log(newFormObj);
     const formId = newFormObj._id.toString();
     revalidatePath("/");
+
     return {
       message: "success",
       data: { formId: formId },
