@@ -35,9 +35,10 @@ export const generateForm = async (
 
   const data = parse.data;
   let completion;
+  const url = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000";
 
   try {
-    const response = await fetch("http://localhost:3000/api/form/generate", {
+    const response = await fetch(url + "/api/form/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
