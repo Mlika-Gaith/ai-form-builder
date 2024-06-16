@@ -1,11 +1,9 @@
 "use server";
 
 import { connectToDB } from "@/db/database";
-import { PROMPT_EXPLANATION } from "@/utils/prompt-explanation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import Form from "@/db/models/formDocument";
-import OpenAI from "openai";
 import Question from "@/db/models/question";
 import FieldOption from "@/db/models/fieldOption";
 import { getServerSession } from "next-auth";
@@ -36,21 +34,24 @@ export const generateForm = async (
   }
 
   const data = parse.data;
-  const promptExplanation = PROMPT_EXPLANATION;
+  let completion;
 
-  const openai = new OpenAI({
-    baseURL: "https://openrouter.ai/api/v1",
-    apiKey: process.env.OPEN_ROUTER_API_KEY,
-  });
-
-  const completion = await openai.chat.completions.create({
-    model: "microsoft/phi-3-medium-128k-instruct:free",
-    messages: [
-      { role: "system", content: `${data.description} ${promptExplanation}` },
-    ],
-  });
-
-  const content = completion?.choices[0].message.content;
+  try {
+    const response = await fetch("http://localhost:3000/api/form/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+    if (response.status === 200) {
+      completion = await response.json();
+    }
+  } catch (error) {
+    console.error("Error sending openai request: ", error);
+  }
+  //@ts-ignore
+  const content = completion?.content.choices[0].message.content;
   const jsonStartIndex = content?.indexOf("{");
   const jsonEndIndex = content?.lastIndexOf("}");
   const jsonString = content?.substring(jsonStartIndex!, jsonEndIndex! + 1);
@@ -92,7 +93,7 @@ export const generateForm = async (
       data: { formId: formId },
     };
   } catch (error) {
-    console.error("Error saving new Form.");
+    console.error("Error saving new Form: ", error);
     return {
       message: "error",
     };
