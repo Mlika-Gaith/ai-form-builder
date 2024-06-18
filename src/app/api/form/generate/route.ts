@@ -1,8 +1,7 @@
 import { PROMPT_EXPLANATION } from "@/utils/prompt-explanation";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
-export const maxDuration = 60;
-export const dynamic = "force-dynamic";
+
 export const POST = async (request: NextRequest) => {
   try {
     const promptExplanation = PROMPT_EXPLANATION;
