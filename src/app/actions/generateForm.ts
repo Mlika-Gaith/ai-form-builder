@@ -9,6 +9,7 @@ import FieldOption from "@/db/models/fieldOption";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 
+export const runtime = "edge";
 export const generateForm = async (
   prevState: { message: string; data?: any },
   formData: FormData
