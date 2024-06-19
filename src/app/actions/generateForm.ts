@@ -38,7 +38,7 @@ export const generateForm = async (
   const url = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
   try {
-    const response = await fetch("/api/form/generate", {
+    const response = await fetch(url + "/api/form/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
