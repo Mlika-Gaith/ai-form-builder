@@ -13,7 +13,7 @@ export const POST = async (request: NextRequest) => {
     });
 
     const completion = await openai.chat.completions.create({
-      model: "microsoft/phi-3-medium-128k-instruct:free",
+      model: "huggingfaceh4/zephyr-7b-beta:free",
       messages: [{ role: "system", content: content }],
     });
     console.log(completion);
