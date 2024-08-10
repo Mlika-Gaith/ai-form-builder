@@ -13,7 +13,7 @@ export const POST = async (request: NextRequest) => {
     });
 
     const completion = await openai.chat.completions.create({
-      model: "huggingfaceh4/zephyr-7b-beta:free",
+      model: "meta-llama/llama-3-8b-instruct:free",
       messages: [{ role: "system", content: content }],
     });
     console.log(completion);
